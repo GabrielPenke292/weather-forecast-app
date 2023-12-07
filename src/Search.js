@@ -10,7 +10,7 @@ const Search = () => {
     }
     return (
         <div className='search'>
-            <input type='text' name='searchInput' onKeyUp={searchInput} />
+            <input type='text' name='searchInput' onKeyUp={searchInput} placeholder='Search City...'/>
         </div>
     )
 }
