@@ -7,6 +7,17 @@ const Search = () => {
         /*
          Fazer requisição API depois
         */
+       const url = `https://api.openweathermap.org/data/2.5/weather?q=${currentValue}&APPID=4b280f067015f08032ff03d7bb174c40`;
+       fetch(url)
+         .then(response => response.json())
+            .then(data => {
+                const {main, name, sys, weather} = data;
+                console.log(data);
+                if(weather !== undefined){
+
+                    // console.log(weather[0]['description']);
+                }
+            })
     }
     return (
         <div className='search'>
