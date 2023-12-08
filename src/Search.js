@@ -1,37 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react';
+// Certifique-se de importar o arquivo CSS correspondente para os estilos
 
-const Search = () => {
+function Search() {
+    const [cities, setCities] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     function searchInput(event) {
-        let currentValue = document.querySelector('input[name="searchInput"]').value;
+        let currentValue = event.target.value;
+        setShowSuggestions(currentValue.length > 0);  // Mostra as sugestões se houver texto no input
 
         const urlAccuWeather = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=K3rgPRk6b2GzxJgChMYMtxdQHuuxTxAB&q=${currentValue}`;
         fetch(urlAccuWeather)
-         .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
-                // const {main, name, sys, weather} = data;
-                console.log(data);
-            })
-        /*
-         Fazer requisição API depois
-        */
-    //    const url = `https://api.openweathermap.org/data/2.5/weather?q=${currentValue}&APPID=4b280f067015f08032ff03d7bb174c40`;
-    //    fetch(url)
-    //      .then(response => response.json())
-    //         .then(data => {
-    //             const {main, name, sys, weather} = data;
-    //             console.log(data);
-    //             if(weather !== undefined){
-
-    //                 // console.log(weather[0]['description']);
-    //             }
-    //         })
+                setCities(data);
+            });
     }
+
     return (
         <div className='search'>
-            <input type='text' name='searchInput' onKeyUp={searchInput} placeholder='Search City...'/>
+            <input type='text' name='searchInput' onKeyUp={searchInput} placeholder='Search City...' />
+            {showSuggestions && (
+                <div className="suggestions">
+                    {cities.map((city, index) => (
+                        <button key={index} onClick={() => console.log(city.Key)}>
+                            {city.LocalizedName}
+                        </button>
+                    ))}
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
-export default Search
+export default Search;

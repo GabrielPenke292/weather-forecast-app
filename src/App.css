@@ -19,3 +19,23 @@
   font-size: 16px;
   color: black;
 }
+
+.search .suggestions {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  z-index: 1000;
+}
+
+.search .suggestions button {
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: 10px;
+}
+
+.search .suggestions button:hover {
+  background-color: #f0f0f0;
+}
