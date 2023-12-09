@@ -8,7 +8,7 @@ function Search() {
     async function searchInput(event) {
         let currentValue = event.target.value;
 
-        const urlAccuWeather = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=K3rgPRk6b2GzxJgChMYMtxdQHuuxTxAB&q=${currentValue}`;
+        const urlAccuWeather = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_ACCU_WEATHER_API_KEY}&q=${currentValue}`;
         try {
             const response = await fetch(urlAccuWeather);
             if (!response.ok) {
@@ -30,7 +30,8 @@ function Search() {
     function getWeatherForecast(city, country){
         
         setShowSuggestions(false)
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=4b280f067015f08032ff03d7bb174c40`;
+        document.getElementsByName('searchInput')[0].value = city;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`;
 
         fetch(url)
          .then(response => response.json())
