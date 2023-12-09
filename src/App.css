@@ -5,9 +5,10 @@
 }
 
 .search{
-  background-color: violet;
+  background-color: rgb(180, 95, 180);
   padding: 10px;
   text-align: center;
+  position: relative;
 }
 
 .search input[type="text"]{
@@ -22,12 +23,15 @@
 
 .search .suggestions {
   position: absolute;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-top: none;
-  z-index: 1000;
+    left: 50%; /* Centraliza horizontalmente em relação ao contêiner pai */
+    transform: translateX(-50%); /* Desloca a div de sugestões para trás pela metade de sua largura */
+    width: 48%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
 .search .suggestions button {
   width: 100%;
   border: none;
