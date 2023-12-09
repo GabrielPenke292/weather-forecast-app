@@ -5,16 +5,26 @@ function Search() {
     const [cities, setCities] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
-    function searchInput(event) {
+    async function searchInput(event) {
         let currentValue = event.target.value;
-        setShowSuggestions(currentValue.length > 0);  // Mostra as sugestões se houver texto no input
 
         const urlAccuWeather = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=K3rgPRk6b2GzxJgChMYMtxdQHuuxTxAB&q=${currentValue}`;
-        fetch(urlAccuWeather)
-            .then(response => response.json())
-            .then(data => {
+        try {
+            const response = await fetch(urlAccuWeather);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            if(data === undefined || data.length === 0){
+                setShowSuggestions(false)
+            }else{
+                setShowSuggestions(currentValue.length > 0); 
                 setCities(data);
-            });
+            }
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+            setShowSuggestions(false)
+        }
     }
 
     return (
