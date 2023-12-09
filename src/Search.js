@@ -53,6 +53,9 @@ function Search() {
 
     return (
         <div className='searchWrapper'>
+            <div className='logo search'>
+                <img src='/logo.png' alt='logo' style={{width: "150px"}}/>
+            </div>
             <div className='search'>
                 <input type='text' name='searchInput' onKeyUp={searchInput} placeholder='Search City...' />
                 {showSuggestions && (
@@ -73,7 +76,7 @@ function Search() {
                     <p>{cityData.description}</p>
                     <img src={cityData.icon} alt={cityData.description} />
                 </div> :
-                <div>Search for a city</div>
+                <div style={{padding: '10px', fontWeight: 'bold'}}>Search for a city</div>
             }
 
         </div>
