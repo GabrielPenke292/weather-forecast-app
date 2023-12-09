@@ -43,3 +43,17 @@
 .search .suggestions button:hover {
   background-color: #f0f0f0;
 }
+
+
+.cityDataContainer{
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
+
+}
+
+.cityDataContainer p{
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
