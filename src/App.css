@@ -23,8 +23,8 @@
 
 .search .suggestions {
   position: absolute;
-    left: 50%; /* Centraliza horizontalmente em relação ao contêiner pai */
-    transform: translateX(-50%); /* Desloca a div de sugestões para trás pela metade de sua largura */
+    left: 50%;
+    transform: translateX(-50%); 
     width: 48%;
     background-color: white;
     border: 1px solid #ddd;

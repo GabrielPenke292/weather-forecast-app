@@ -38,7 +38,6 @@ function Search() {
          .then(response => response.json())
             .then(data => {
                 const {main, name, sys, weather} = data;
-                console.log(data);
                 if(weather !== undefined){
                     let icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]['icon']}.svg`
                     setCityData({
@@ -48,7 +47,6 @@ function Search() {
                         description: weather[0]['description'],
                         icon
                     });
-                    console.log(weather[0]['icon']);
                 }
             })
     }
