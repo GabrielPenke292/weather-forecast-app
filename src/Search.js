@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 function Search() {
     const [cities, setCities] = useState([]);
+    const [cityData, setCityData] = useState(null);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     async function searchInput(event) {
@@ -39,24 +40,44 @@ function Search() {
                 const {main, name, sys, weather} = data;
                 console.log(data);
                 if(weather !== undefined){
-
-                    console.log(weather[0]['description']);
+                    let icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]['icon']}.svg`
+                    setCityData({
+                        name,
+                        country: sys.country,
+                        temp: Math.round(main.temp - 273.15),
+                        description: weather[0]['description'],
+                        icon
+                    });
+                    console.log(weather[0]['icon']);
                 }
             })
     }
 
     return (
-        <div className='search'>
-            <input type='text' name='searchInput' onKeyUp={searchInput} placeholder='Search City...' />
-            {showSuggestions && (
-                <div className="suggestions">
-                    {cities.map((city, index) => (
-                        <button key={index}  onClick={()=>getWeatherForecast(city.LocalizedName, city.Country.ID)}>
-                            {city.LocalizedName}
-                        </button>
-                    ))}
-                </div>
-            )}
+        <div className='searchWrapper'>
+            <div className='search'>
+                <input type='text' name='searchInput' onKeyUp={searchInput} placeholder='Search City...' />
+                {showSuggestions && (
+                    <div className="suggestions">
+                        {cities.map((city, index) => (
+                            <button key={index}  onClick={()=>getWeatherForecast(city.LocalizedName, city.Country.ID)}>
+                                {city.LocalizedName}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+            {
+                (cityData != null) ?
+                <div className='cityDataContainer'>
+                    <p>{cityData.name}, {cityData.country}</p>
+                    <p>{cityData.temp}°C</p>
+                    <p>{cityData.description}</p>
+                    <img src={cityData.icon} alt={cityData.description} />
+                </div> :
+                <div>Search for a city</div>
+            }
+
         </div>
     );
 }
